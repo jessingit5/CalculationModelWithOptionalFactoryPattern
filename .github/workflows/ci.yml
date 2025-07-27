@@ -68,4 +68,4 @@ jobs:
           context: .
           push: true
           # Replace 'your-repo-name' with your actual Docker Hub repository name
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/your-repo-name:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/calculator_model:latest
