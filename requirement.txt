@@ -1,0 +1,17 @@
+# requirements.txt
+
+# Core Framework
+fastapi
+uvicorn[standard]
+
+# Database (SQLAlchemy ORM + PostgreSQL Driver)
+sqlalchemy
+psycopg2-binary
+
+# Data Validation & Hashing
+pydantic[email]
+passlib[bcrypt]
+
+# Testing
+pytest
+requests

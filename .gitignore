@@ -1,0 +1,10 @@
+# Local environment variables
+.env
+
+# virtualenv
+venv/
+env/
+.venv/
+
+# IDE / Editor specific files
+.vscode/
