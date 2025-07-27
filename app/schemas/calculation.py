@@ -1,14 +1,11 @@
-from pydantic import BaseModel, model_validator, computed_field
+from pydantic import BaseModel, model_validator, computed_field, ConfigDict
 from enum import Enum
-from typing import Optional
-
-from ..core.factory import CalculationFactory 
+from ..core.factory import CalculationFactory
 class CalculationType(str, Enum):
     ADD = "add"
     SUBTRACT = "subtract"
     MULTIPLY = "multiply"
     DIVIDE = "divide"
-
 class CalculationCreate(BaseModel):
     a: float
     b: float
@@ -21,20 +18,16 @@ class CalculationCreate(BaseModel):
         return self
 
 class CalculationRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     a: float
     b: float
-    type: CalculationType
+    type: str
     user_id: int
 
     @computed_field
     @property
     def result(self) -> float:
-        try:
-            operation = CalculationFactory.get_operation(self.type)
-            return operation(self.a, self.b).execute()
-        except (ValueError, KeyError):
-            return float('nan') 
-
-    class Config:
-        from_attributes = True
+        operation = CalculationFactory.get_operation(self.type)
+        return operation(self.a, self.b).execute()
